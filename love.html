@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(-45deg, #ff4d6d, #ff8fa3, #f8c8dc, #ff6f91);
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* HEADER */
+        .sagnik-navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px 80px;
+            z-index: 999;
+        }
+
+        .sagnik-nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .sagnik-nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .sagnik-nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: #000;
+            transition: .3s;
+        }
+
+        .sagnik-nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .sagnik-dropdown {
+            position: relative;
+        }
+
+        .sagnik-submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            list-style: none;
+            padding: 10px 0;
+            border-radius: 10px;
+            min-width: 180px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: .3s ease;
+        }
+
+        .sagnik-dropdown:hover .sagnik-submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .sagnik-submenu li {
+            padding: 10px 20px;
+        }
+
+        /* MAIN WRAPPER */
+        .love-wrapper {
+            margin-top: 160px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            padding: 40px;
+        }
+
+        /* GLASS CARDS */
+        .side-card {
+            width: 280px;
+            min-height: 300px;
+            padding: 30px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            color: #000;
+            text-align: center;
+            transition: .3s ease;
+        }
+
+        .side-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(255, 105, 180, 0.5);
+        }
+
+        /* PHOTO WHEEL */
+        .wheel-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .photo-wheel {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotateWheel 20s linear infinite;
+        }
+
+        @keyframes rotateWheel {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .photo-wheel img {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 6 positions */
+        .photo-wheel img:nth-child(1) {
+            top: 0;
+            left: 140px;
+        }
+
+        .photo-wheel img:nth-child(2) {
+            top: 60px;
+            right: 0;
+        }
+
+        .photo-wheel img:nth-child(3) {
+            bottom: 60px;
+            right: 0;
+        }
+
+        .photo-wheel img:nth-child(4) {
+            bottom: 0;
+            left: 140px;
+        }
+
+        .photo-wheel img:nth-child(5) {
+            bottom: 60px;
+            left: 0;
+        }
+
+        .photo-wheel img:nth-child(6) {
+            top: 60px;
+            left: 0;
+        }
+
+        .center-love {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: white;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            margin-top: 40px;
+            padding: 12px 30px;
+            border-radius: 30px;
+            background: white;
+            color: #ff2e63;
+            text-decoration: none;
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            background: black;
+            color: white;
+        }
+
+        /* MUSIC BUTTON */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: .3s ease;
+            z-index: 1000;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* FOOTER */
+        .sagnik-footer {
+            width: 100%;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .footer-line {
+            width: 60%;
+            height: 1px;
+            margin: 0 auto 20px auto;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.4), transparent);
+        }
+
+        .sagnik-footer p {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:1000px) {
+            .love-wrapper {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MUSIC -->
+    <audio id="bgMusic" loop>
+        <source src="love.mp3" type="audio/mp3">
+    </audio>
+
+    <button id="musicToggle" class="music-btn">🔊</button>
+
+    <script>
+        const music = document.getElementById("bgMusic");
+        const btn = document.getElementById("musicToggle");
+        let state = localStorage.getItem("musicPlaying");
+
+        function playMusic() {
+            music.play().catch(() => { });
+            btn.textContent = "🔊";
+            localStorage.setItem("musicPlaying", "true");
+        }
+
+        if (state === null || state === "true") {
+            playMusic();
+        } else {
+            music.pause();
+            btn.textContent = "🔇";
+        }
+
+        btn.addEventListener("click", () => {
+            if (music.paused) {
+                playMusic();
+            } else {
+                music.pause();
+                btn.textContent = "🔇";
+                localStorage.setItem("musicPlaying", "false");
+            }
+        });
+    </script>
+
+    <!-- HEADER -->
+    <header class="sagnik-navbar">
+        <ul class="sagnik-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="sagnik-dropdown">
+                <span>Days</span>
+                <ul class="sagnik-submenu">
+                    <li><a href="roseday.html">Rose Day</a></li>
+                    <li><a href="proposeday.html">Propose Day</a></li>
+                    <li><a href="teddyday.html">Teddy Day</a></li>
+                    <li><a href="chocolateday.html">Chocolate Day</a></li>
+                    <li><a href="promiseday.html">Promise Day</a></li>
+                    <li><a href="hugday.html">Hug Day</a></li>
+                    <li><a href="kissday.html">Kiss Day</a></li>
+                </ul>
+            </li>
+            <li><a href="memories.html">Memories</a></li>
+            <li><a href="love.html">Love</a></li>
+        </ul>
+    </header>
+
+    <!-- MAIN -->
+    <div class="love-wrapper">
+
+        <!-- LEFT CONTENT -->
+        <div class="side-card">
+            <h3>What I call him…</h3>
+            <p>Khatarnak Billu Badmash<br>Billu Badmosh,<br>Pochuuuu,<br>My home
+
+            </p>
+        </div>
+
+        <!-- WHEEL -->
+        <div class="wheel-container">
+            <div class="photo-wheel">
+                <img src="pic8.jpg">
+                <img src="pic2.jpg">
+                <img src="pic3.jpg">
+                <img src="pic4.jpg">
+                <img src="pic5.jpg">
+                <img src="pic6.jpg">
+            </div>
+            <div class="center-love">❤️</div>
+        </div>
+
+        <!-- RIGHT CONTENT -->
+        <div class="side-card">
+            <h3>What he  calls me</h3>
+            <p>
+               Bhutki,<br>Mutki,<br>Chutki,<br>Natki
+            </p>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back-btn">Back</a>
+
+    <footer class="sagnik-footer">
+        <div class="footer-line"></div>
+        <p>Made by Shreemoyee © 2026</p>
+    </footer>
+
+</body>
+
+</html>

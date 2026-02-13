@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine Day</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4b8b9b1d3f.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:'Poppins', sans-serif;
+    overflow-x:hidden;
+    background:linear-gradient(135deg,#ff4d6d,#f8c8dc);
+        }
+
+        .sagnik-container {
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px 80px;
+        }
+/* ===== CENTER NAVBAR ===== */
+
+.sagnik-navbar{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* Center nav links */
+.sagnik-nav-links{
+    display:flex;
+    gap:35px;
+    list-style:none;
+    font-weight:500;
+}
+
+/* Keep profile icon on right */
+.sagnik-profile{
+    position:absolute;
+    right:0;
+    font-size:18px;
+    cursor:pointer;
+}
+        /* underline */
+        .sagnik-nav-links li::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: #000;
+            transition: .3s;
+        }
+
+        .sagnik-nav-links li:hover::after {
+            width: 100%;
+        }
+
+        /* ===== DROPDOWN FIXED ===== */
+        .sagnik-dropdown {
+            position: relative;
+        }
+
+        .sagnik-dropdown span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sagnik-submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            list-style: none;
+            padding: 10px 0;
+            border-radius: 10px;
+            min-width: 180px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: .3s ease;
+            z-index: 100;
+        }
+
+        .sagnik-submenu li {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .sagnik-submenu li:hover {
+            background: #ff2e63;
+            color: #fff;
+        }
+
+        /* hover open */
+        .sagnik-dropdown:hover .sagnik-submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .sagnik-profile {
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .sagnik-hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .sagnik-left {
+            flex: 1;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 1s;
+        }
+
+        .sagnik-left.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sagnik-left h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 80px;
+            line-height: 1.05;
+        }
+
+        .sagnik-left p {
+            margin: 25px 0;
+            max-width: 450px;
+        }
+
+        .sagnik-btn {
+            padding: 14px 30px;
+            background: #ff2e63;
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .sagnik-btn:hover {
+            background: #000;
+        }
+
+        /* ===== IMAGE SECTION ===== */
+        .sagnik-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .sagnik-bg-shape {
+            position: absolute;
+            width: 450px;
+            height: 550px;
+            background: linear-gradient(180deg, #ff2e63, #ff8fa3);
+            border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+            filter: blur(40px);
+            opacity: .4;
+            animation: floatShape 6s ease-in-out infinite;
+        }
+
+        .sagnik-glow {
+            position: absolute;
+            width: 480px;
+            height: 580px;
+            background: radial-gradient(circle, #ffffff60 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .sagnik-image-box {
+            width: 420px;
+            height: 520px;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, .35);
+            position: relative;
+            z-index: 2;
+            transform: translateY(60px);
+            opacity: 0;
+            animation: slideUp 1.2s ease forwards;
+        }
+
+        .sagnik-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes floatShape {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* floating hearts */
+        .sagnik-heart {
+            position: absolute;
+            font-size: 28px;
+            color: #ff2e63;
+            animation: floatHeart 4s ease-in-out infinite;
+            opacity: .8;
+        }
+
+        .sagnik-heart1 {
+            top: 60px;
+            right: 20px;
+        }
+
+        .sagnik-heart2 {
+            bottom: 80px;
+            right: -10px;
+        }
+
+        .sagnik-heart3 {
+            top: 200px;
+            left: -30px;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @media(max-width:900px) {
+            .sagnik-hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .sagnik-left h1 {
+                font-size: 50px;
+            }
+        }
+        /* ===== MODERN AESTHETIC FOOTER ===== */
+
+.sagnik-footer{
+    margin-top:120px;
+    text-align:center;
+    padding-bottom:40px;
+    background:transparent;
+}
+
+.footer-line{
+    width:60%;
+    height:1px;
+    margin:0 auto 25px auto;
+    background:linear-gradient(to right, transparent, rgba(0,0,0,0.4), transparent);
+}
+
+.sagnik-footer p{
+    font-size:14px;
+    letter-spacing:1px;
+    color:#000;
+    opacity:0.7;
+}
+/* ===== MUSIC BUTTON ===== */
+.music-btn{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,0.3);
+    backdrop-filter:blur(10px);
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+    transition:0.3s ease;
+    z-index:1000;
+}
+
+.music-btn:hover{
+    transform:scale(1.1);
+}
+    </style>
+</head>
+
+<body>
+    <!-- ===== UNIVERSAL BACKGROUND MUSIC ===== -->
+    
+    <audio id="bgMusic" loop autoplay>
+        <source src="love.mp3" type="audio/mp3">
+    </audio>
+    
+    <button id="musicToggle" class="music-btn">🔊</button>
+    
+    <script>
+        const music = document.getElementById("bgMusic");
+        const toggleBtn = document.getElementById("musicToggle");
+
+        // Check saved music state
+        let isPlaying = localStorage.getItem("musicPlaying");
+
+        if (isPlaying === null || isPlaying === "true") {
+            music.play().catch(() => { });
+            toggleBtn.textContent = "🔊";
+            localStorage.setItem("musicPlaying", "true");
+        } else {
+            music.pause();
+            toggleBtn.textContent = "🔇";
+        }
+
+        // Toggle button
+        toggleBtn.addEventListener("click", () => {
+            if (music.paused) {
+                music.play();
+                toggleBtn.textContent = "🔊";
+                localStorage.setItem("musicPlaying", "true");
+            } else {
+                music.pause();
+                toggleBtn.textContent = "🔇";
+                localStorage.setItem("musicPlaying", "false");
+            }
+        });
+    </script>
+
+    <div class="sagnik-container">
+
+        <div class="sagnik-navbar">
+
+            <ul class="sagnik-nav-links">
+                <li class="sagnik-dropdown">
+                    <span>Days <i class="fas fa-chevron-down"></i></span>
+                    <ul class="sagnik-submenu">
+                        <li><a href="roseday.html">Rose Day</a></li>
+                        <li><a href="proposeday.html">Propose Day</a></li>
+                        <li><a href="teddyday.html">Teddy Day</a></li>
+                        <li><a href="chocolateday.html">Chocolate Day</a></li>
+                        <li><a href="promiseday.html">Promise Day</a></li>
+                        <li><a href="hugday.html">Hug Day</a></li>
+                        <li><a href="kissday.html">Kiss Day</a></li>
+                    </ul>
+                </li>
+
+            <li><a href="memories.html" style="text-decoration:none;color:inherit;">Memories</a></li>
+                <li><a href="love.html" style="text-decoration:none;color:inherit;">Love</a></li>
+            </ul>
+
+            <div class="sagnik-profile">
+                <i class="fas fa-user"></i>
+            </div>
+
+        </div>
+
+        <div class="sagnik-hero">
+            <div class="sagnik-left" id="heroText">
+                <h1>HAPPY<br>VALENTINE'S<br>DAY<br>MY LOVE</h1>
+                <p>This may be a small gift, but it carries the biggest piece of my heart. Every little detail is filled with my love,
+                gratitude, and the truth of how much you mean to me. I just wanted to make you smile, the way you make my world brighter
+                every single day.</p>
+                <a href="memories.html" class="sagnik-btn">Let's Go</a>
+            </div>
+
+            <div class="sagnik-right">
+                <div class="sagnik-bg-shape"></div>
+                <div class="sagnik-glow"></div>
+
+                <div class="sagnik-image-box">
+                    <img src="pic6.jpg">
+                </div>
+
+                <div class="sagnik-heart sagnik-heart1">❤</div>
+                <div class="sagnik-heart sagnik-heart2">❤</div>
+                <div class="sagnik-heart sagnik-heart3">❤</div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.getElementById("heroText").classList.add("show");
+        });
+    </script>
+    <footer class="sagnik-footer">
+        <div class="footer-line"></div>
+        <p>Made by <span>Shreemoyee</span> © 2026</p>
+    </footer>
+
+</body>
+
+</html>

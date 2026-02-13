@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memories ❤️</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(-45deg, #ff4d6d, #ff8fa3, #f8c8dc, #ff6f91);
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* HEADER */
+        .sagnik-navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px 80px;
+            z-index: 999;
+        }
+
+        .sagnik-nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .sagnik-nav-links a,
+        .sagnik-dropdown span {
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .sagnik-nav-links a::after,
+        .sagnik-dropdown span::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: #000;
+            transition: .3s;
+        }
+
+        .sagnik-nav-links a:hover::after,
+        .sagnik-dropdown span:hover::after {
+            width: 100%;
+        }
+
+        .sagnik-dropdown {
+            position: relative;
+        }
+
+        .sagnik-submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            list-style: none;
+            padding: 10px 0;
+            border-radius: 12px;
+            min-width: 180px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: .3s ease;
+        }
+
+        .sagnik-dropdown:hover .sagnik-submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .sagnik-submenu li {
+            padding: 10px 20px;
+        }
+
+        /* MEMORY SECTION */
+        .memory-container {
+            padding: 160px 40px 80px 40px;
+        }
+
+        .memory-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 60px;
+            margin-bottom: 80px;
+        }
+
+        /* FIXED IMAGE SIZE */
+        .memory-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 auto 120px auto;
+            gap: 60px;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 60px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: 0.4s ease;
+        }
+
+        .memory-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
+        }
+
+        /* IMAGE FIX */
+        .memory-image {
+            flex: 0 0 480px;
+            /* FIXED BIGGER WIDTH */
+            max-width: 480px;
+            background: white;
+            padding: 18px 18px 45px 18px;
+            border-radius: 14px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            transition: 0.4s ease;
+            transform: rotate(-2deg);
+        }
+
+        .memory-box.reverse .memory-image {
+            transform: rotate(2deg);
+        }
+
+        .memory-image img {
+            width: 100%;
+            height: 520px;
+            /* FIXED HEIGHT */
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .memory-image:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 25px 60px rgba(255, 105, 180, 0.6);
+        }
+
+        .memory-content {
+            flex: 1;
+        }
+
+        .memory-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .memory-content p {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .memory-box.reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* CAROUSEL */
+        .carousel-section {
+            max-width: 800px;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        .carousel-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            margin-bottom: 40px;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            max-width: 800px;
+            height: 420px;
+            margin: 0 auto;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .carousel img {
+            width: 800px;
+            height: 420px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: none;
+            font-size: 30px;
+            padding: 12px 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background: #ff4d6d;
+            color: white;
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        /* MUSIC BUTTON */
+        .music-btn {
+            position: fixed;
+            bottom: 90px;
+            right: 40px;
+            width: 55px;
+            height: 55px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: .3s ease;
+            z-index: 1000;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* FOOTER */
+        .sagnik-footer {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .footer-line {
+            width: 60%;
+            height: 1px;
+            margin: 0 auto 20px auto;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.4), transparent);
+        }
+
+        .sagnik-footer p {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        @media(max-width:900px) {
+
+            .memory-box,
+            .memory-box.reverse {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .memory-image {
+                flex: none;
+                max-width: 100%;
+            }
+
+            .memory-image img {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="sagnik-navbar">
+        <ul class="sagnik-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="sagnik-dropdown">
+                <span>Days</span>
+                <ul class="sagnik-submenu">
+                    <li><a href="roseday.html">Rose Day</a></li>
+                    <li><a href="proposeday.html">Propose Day</a></li>
+                    <li><a href="teddyday.html">Teddy Day</a></li>
+                    <li><a href="chocolateday.html">Chocolate Day</a></li>
+                    <li><a href="promiseday.html">Promise Day</a></li>
+                    <li><a href="hugday.html">Hug Day</a></li>
+                    <li><a href="kissday.html">Kiss Day</a></li>
+                </ul>
+            </li>
+            <li><a href="memories.html">Memories</a></li>
+            <li><a href="love.html">Love</a></li>
+        </ul>
+    </header>
+
+    <div class="memory-container">
+
+        <h1 class="memory-title">Our Beautiful Memories ❤️</h1>
+
+        <div class="memory-box">
+            <div class="memory-image"><img src="pic2.jpg"></div>
+            <div class="memory-content">
+                <h2>First Memory</h2>
+                <p>I still remember the first time I saw you. The world didn’t stop, yet for me it felt like everything slowed down. I
+                wasn’t prepared for the way your eyes held me in that quiet moment. When your hand gently touched mine, it wasn't just a
+                touch , it was a spark that ran straight to my heart. I felt a sudden shock, the kind that steals your breath away. I
+                kept walking as if nothing had changed, but deep inside, I knew that in that silent moment, something beautiful had
+                begun.</p>
+            </div>
+        </div>
+
+        <div class="memory-box reverse">
+            <div class="memory-image"><img src="pic7.jpg"></div>
+            <div class="memory-content">
+                <h2>Special Moments</h2>
+                <p>For me, the most special moments are when you act so childishly around me, when you let your guard down and simply
+                become yourself. In those little moments, I feel like I am the closest person to your heart, the one you trust enough
+                to show your purest, most innocent side. Knowing that I am the one who can bring out your inner child, the one who makes
+                you feel safe enough to be playful and carefree, means more to me than anything else. It makes me feel deeply loved,
+                deeply trusted, and truly special. 💖</p>
+            </div>
+        </div>
+
+        <div class="memory-box">
+            <div class="memory-image"><img src="pic4.jpg"></div>
+            <div class="memory-content">
+                <h2>My Love</h2>
+                <p>You are my everything my soul, my home, my safe place in this chaotic world. In you, I have found comfort, warmth, and
+                a love that feels like destiny. You are the calm to my storms, the light in my darkest hours, and the reason my heart
+                beats with purpose. Being with you feels like belonging, like I have finally found where I was always meant to be. You
+                are not just a part of my life,you are the very heart of it. ❤️</p>
+            </div>
+        </div>
+<!-- ===== CAROUSEL SECTION ===== -->
+<div class="carousel-section">
+
+    <h2 class="carousel-title">More Beautiful Moments 💕</h2>
+
+    <div class="carousel">
+
+        <button class="carousel-btn prev">&#10094;</button>
+
+        <div class="carousel-track">
+            <img src="pic1.jpg">
+            <img src="pic2.jpg">
+            <img src="pic3.jpg">
+            <img src="pic4.jpg">
+            <img src="pic5.jpg">
+            <img src="pic6.jpg">
+            <img src="pic7.jpg">
+        </div>
+
+        <button class="carousel-btn next">&#10095;</button>
+
+    </div>
+</div>
+    </div>
+
+    <!-- Petals -->
+    <div class="petal p1">🌸</div>
+    <div class="petal p2">🌸</div>
+    <div class="petal p3">🌸</div>
+    <div class="petal p4">🌸</div>
+
+    <!-- Sparkles -->
+    <div class="sparkle s1"></div>
+    <div class="sparkle s2"></div>
+    <div class="sparkle s3"></div>
+
+    <!-- MUSIC -->
+    <audio id="bgMusic" loop>
+        <source src="mu1.mp3" type="audio/mp3">
+    </audio>
+
+    <button id="musicToggle" class="music-btn">🔊</button>
+
+    <script>
+        const music = document.getElementById("bgMusic");
+        const btn = document.getElementById("musicToggle");
+
+        let state = localStorage.getItem("musicPlaying");
+
+        function playMusic() {
+            music.play().catch(() => { });
+            btn.textContent = "🔊";
+            localStorage.setItem("musicPlaying", "true");
+        }
+
+        if (state === null || state === "true") {
+            playMusic();
+        } else {
+            music.pause();
+            btn.textContent = "🔇";
+        }
+
+        btn.addEventListener("click", () => {
+            if (music.paused) {
+                playMusic();
+            } else {
+                music.pause();
+                btn.textContent = "🔇";
+                localStorage.setItem("musicPlaying", "false");
+            }
+        });
+        /* ===== CAROUSEL JS ===== */
+
+            const track = document.querySelector(".carousel-track");
+            const slides = document.querySelectorAll(".carousel-track img");
+            const nextBtn = document.querySelector(".next");
+            const prevBtn = document.querySelector(".prev");
+
+            let index = 0;
+
+            function updateCarousel() {
+                track.style.transform = `translateX(-${index * 100}%)`;
+            }
+
+            nextBtn.addEventListener("click", () => {
+                index = (index + 1) % slides.length;
+                updateCarousel();
+            });
+
+            prevBtn.addEventListener("click", () => {
+                index = (index - 1 + slides.length) % slides.length;
+                updateCarousel();
+            });
+
+            /* Auto slide */
+            setInterval(() => {
+                index = (index + 1) % slides.length;
+                updateCarousel();
+            }, 4000);
+            /* ===== HEART EXPLOSION ===== */
+
+                document.addEventListener("click", function (e) {
+
+                    for (let i = 0; i < 8; i++) {
+                        const heart = document.createElement("div");
+                        heart.innerHTML = "❤";
+                        heart.style.position = "fixed";
+                        heart.style.left = e.clientX + "px";
+                        heart.style.top = e.clientY + "px";
+                        heart.style.fontSize = "20px";
+                        heart.style.pointerEvents = "none";
+                        heart.style.color = "#ff2e63";
+                        heart.style.zIndex = "9999";
+                        heart.style.transition = "1s ease-out";
+
+                        document.body.appendChild(heart);
+
+                        setTimeout(() => {
+                            heart.style.transform = `translate(${(Math.random() - 0.5) * 200}px,${(Math.random() - 0.5) * 200}px) scale(2)`;
+                            heart.style.opacity = "0";
+                        }, 10);
+
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 1000);
+                    }
+
+                });
+    </script>
+
+
+    <footer class="sagnik-footer">
+        <div class="footer-line"></div>
+        <p>Made by Shreemoyee © 2026</p>
+    </footer>
+
+</body>
+
+</html>
